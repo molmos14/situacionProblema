@@ -13,7 +13,22 @@ std::vector<std::string> separar(std::string linea);
 int main(int argc, char const *argv[])
 {
     std::ifstream entrada;
-    entrada.open("DatosPeliculas.csv");
+    // Excepciones 
+    // entrada.flags(std::ios_base::failbit);
+    entrada.exceptions(std::ifstream::failbit);
+
+    try{
+        entrada.open("DatosPeliculas.csv");
+    } catch(std::ifstream::failure &e){ // try / catch atrapa errores y evalua donde posiblemente haya errores
+        std::cout << "ERROR excepcion al abrir el archivo" << std::endl;
+    }
+
+/*
+    if(entrada.fail()){
+        std::cout << "error, no se puede leer el archivo..." << std::endl;
+        return -1; // porque regresa un -1. Le indica al programa que hay un error
+    }
+*/
 
     std::string linea;
 
@@ -32,9 +47,13 @@ int main(int argc, char const *argv[])
     }
 
     //siempre cerrar el archivo al abrirlo
-    entrada.close();
+    try{
+        entrada.close();
+    } catch(std::ifstream::failure &e){
+        std::cout << "error al cerrar el programa" << std::endl;
+    }
 
-    return 0;
+    return 0; // si llega a esta linea dice que todo cul
 }
 
 std::vector<std::string> separar(std::string linea){
