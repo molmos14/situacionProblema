@@ -7,19 +7,24 @@ Clase Video
 #include <string>
 
 class Video{
-    private:
-        int ID;
+    protected:
+        std::string ID;
         std::string Nombre;
         std::string Genero;
-        int Calificacion;
+        double Calificacion;
         int Duracion;
         std::string Fecha_estreno;
     public:
-        void set_ID(std::string ID);
-        void set_calificacion(double Calificacion);
+        Video(std::string ID, std::string Nombre, std::string Genero, double Calificacion, int Duracion, std::string Fecha_estreno);
 
+        virtual void set_Calificacion(double Calificacion) = 0;
+
+        std::string get_ID();
         std::string get_Nombre();
         std::string get_Genero();
+        double get_Calificacion();
+        int get_Duracion();
+        std::string get_Fecha_estreno();
 };
 
 #endif

@@ -14,7 +14,6 @@ int main(int argc, char const *argv[])
 {
     std::ifstream entrada;
     // Excepciones 
-    // entrada.flags(std::ios_base::failbit);
     entrada.exceptions(std::ifstream::failbit);
 
     try{
