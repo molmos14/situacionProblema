@@ -40,6 +40,12 @@ int main(int argc, char const *argv[])
         if(datos.size() == 6){
             std::cout << " Pelicula" << std::endl;
             // new Pelicula(datos);
+            for(std::string dato : datos){
+                std::cout << dato << std::endl;
+                // esto sirve para que cuando quieras guardar los objetos de manera dinamica
+                // puedas guardar en ese objeto cada valor en su variable de instancia que se 
+                // esta imprimiendo en cada iteración
+            }
         }else{
             std::cout << " Episodio" << std::endl;
             // new Episodio(datos);
