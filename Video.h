@@ -5,6 +5,7 @@ Clase Video
 #ifndef VIDEO_H
 #define VIDEO_H
 #include <string>
+#include <iostream>
 
 class Video{
     protected:
@@ -25,6 +26,7 @@ class Video{
         double get_Calificacion();
         int get_Duracion();
         std::string get_Fecha_estreno();
+        virtual void mostrarinfo() = 0;
 };
 
 #endif

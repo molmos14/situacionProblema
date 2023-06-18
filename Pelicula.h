@@ -11,6 +11,7 @@ class Pelicula : public Video{
         Pelicula(std::string ID, std::string Nombre, std::string Genero, double Calificacion, int Duracion, std::string Fecha_estreno);
 
         void set_Calificacion(double Calificacion);
+        void mostrarinfo();
 };
 
 #endif

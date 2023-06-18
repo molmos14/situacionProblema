@@ -17,6 +17,8 @@ class Episodio : public Video{
 
         int get_Temporada();
         int get_Numero_episodio();
+
+        void mostrarinfo();
 };
 
 #endif
