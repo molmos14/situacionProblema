@@ -7,13 +7,15 @@ void ServicioStreaming::mostrar_menu()
         // Crea una variable para guardar la opción elegida
         int opcion;
         int opcion2;
+        int numeroLinea = 1;
         std::string nombre_archivo;
         std::string linea;
-        double cal;
         std::string genero;
         std::string serie_elegida;
         std::ifstream entrada;
-        int numeroLinea = 1;
+        std::string nombre_elegido;
+        double promedio;
+        double cal;
 
         // Crea un bucle que se repite hasta que el usuario elija salir
         do
@@ -49,7 +51,7 @@ void ServicioStreaming::mostrar_menu()
                 catch (std::ifstream::failure &e)
                 { // try / catch atrapa errores y evalua donde posiblemente haya errores
                     std::cout << "ERROR excepcion al abrir el archivo" << std::endl;
-                    continue;
+                    break;
                 }
 
                 // mientras haya una linea en la entrada, sigue leyendola y regresa True
@@ -66,6 +68,7 @@ void ServicioStreaming::mostrar_menu()
                     else
                     {
                         Episodio *episodio = new Episodio(datos[0], datos[1], datos[2], std::stod(datos[3]), std::stoi(datos[4]), datos[5], std::stoi(datos[6]), std::stoi(datos[7]));
+                        episodio->mostrarinfo();
                         Episodios.push_back(episodio);
                     }
                 }
@@ -149,6 +152,7 @@ void ServicioStreaming::mostrar_menu()
                     }
                 }
                 break;
+                
             case 4:
                 std::cout << "Dame una calificacion: ";
                 std::cin >> cal;
@@ -161,13 +165,56 @@ void ServicioStreaming::mostrar_menu()
                     }
                 }
                 break;
-            case 5:
-                std::cout << "prueba" << std::endl;
-                break;
-            case 6:
-                std::cout << "prueba" << std::endl;
 
+            case 5:
+                for (Pelicula *dato : Peliculas)
+                {
+                    dato->mostrarinfo();
+                }
+
+                for (Episodio *dato : Episodios)
+                {
+                    dato->mostrarinfo();
+                }
+
+                std::cout << "Dame el nombre del Video que quieres calificar: ";
+                std::cin >> nombre_elegido;
+                std::cout << "Dame una calificacion: ";
+                std::cin >> cal;
+
+                for (Episodio *dato : Episodios)
+                {
+                    size_t pos = dato->get_Nombre().find(nombre_elegido);
+                    if (pos != std::string::npos)
+                    {
+                        dato->set_Calificacion(cal);
+                        break;
+                    }
+                }
                 break;
+
+            case 6:
+                std::cout << "Series: " << std::endl;
+                for (Episodio *dato : Episodios)
+                {
+                    if (dato->get_Calificacion() >= cal)
+                    {
+                        dato->mostrarinfo();
+                    }
+                }
+                std::cout << "Dame el nombre de la serie elegida: ";
+                std::cin >> serie_elegida;
+
+                for (Episodio *dato : Episodios)
+                {
+                    size_t pos = dato->get_Nombre().find(serie_elegida);
+                    if (pos != std::string::npos)
+                    {
+                        promedio += dato->get_Calificacion();
+                    }
+                }
+                break;
+
             case 7:
                 std::cout << "Gracias por usar el programa. Adiós." << std::endl;
                 break;
